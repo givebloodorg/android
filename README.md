@@ -1,2 +1,2 @@
 # android
-Official Mobile (Android) app for doesangue project
+Official Mobile (Android) app for doesangue project.
