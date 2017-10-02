@@ -13,6 +13,8 @@ import com.android.volley.toolbox.Volley;
  * Created by JM on 02/10/2017.
  */
 public class MySingleton {
+
+    // Singleton instance
     private static MySingleton mInstance;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
