@@ -1,7 +1,7 @@
 language: java
 
 # Disable sudo
-#sudo: false
+# sudo: false
 
 # JDK versions
 jdk:
@@ -16,3 +16,6 @@ jdk:
 #  directories:
 #    - $HOME/.gradle/caches/
 #    - $HOME/.gradle/wrapper/
+#
+before_install:
+  - chmod +x gradlew
