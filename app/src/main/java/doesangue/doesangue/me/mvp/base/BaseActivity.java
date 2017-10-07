@@ -1,4 +1,4 @@
-package doesangue.doesangue.me.mvp;
+package doesangue.doesangue.me.mvp.base;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -44,26 +44,40 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     // Method to show a simple Dialog whith some info
     public final void showDialogInfo(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+       final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setCancelable(false);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setPositiveButton(R.string.ok, null);
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
     }
 
-    public final void showProgress(@StringRes int message) {
+    public final void showProgress(final @StringRes int message) {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
             progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(false);
         }
 
-        progressDialog.setMessage(getString(message));
-        progressDialog.show();
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                progressDialog.setMessage(getString(message));
+                progressDialog.show();
+            }
+        });
+
     }
 
     public final void dismissProgress() {

@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import doesangue.doesangue.me.R;
-import doesangue.doesangue.me.mvp.BaseActivity;
+import doesangue.doesangue.me.mvp.base.BaseActivity;
 
 public class LoginActivity extends BaseActivity implements Contract.ViewImpl {
 

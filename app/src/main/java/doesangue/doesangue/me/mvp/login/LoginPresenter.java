@@ -52,7 +52,7 @@ public class LoginPresenter implements Contract.PresenterImpl, LoginRequestListe
         }
 
         // If email is correct, clean the previous error.
-        view.setEmailError("");
+        view.setEmailError(null);
 
         // Check if password is not empty
         if (password.trim().length() == 0) {
@@ -61,7 +61,7 @@ public class LoginPresenter implements Contract.PresenterImpl, LoginRequestListe
         }
 
         // If password is correct, clean the previous error.
-        view.setPasswordError("");
+        view.setPasswordError(null);
 
         // The entired data is valid, so
         // we can now make the login with the server.

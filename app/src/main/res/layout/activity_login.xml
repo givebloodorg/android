@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:paddingTop="32dp"
     android:paddingBottom="32dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -13,6 +12,7 @@
     <TextView
         style="@style/TextAppearance.AppCompat.Display2"
         android:gravity="center_horizontal"
+        android:paddingTop="64dp"
         android:paddingBottom="64dp"
         android:text="@string/app_name"
         android:layout_width="match_parent"
@@ -20,6 +20,7 @@
 
     <EditText
         android:hint="@string/email"
+        android:layout_marginTop="32dp"
         android:id="@+id/edt_email"
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
@@ -38,5 +39,5 @@
         android:layout_marginTop="72dp"
         android:text="@string/login_text_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="60dp" />
 </LinearLayout>
