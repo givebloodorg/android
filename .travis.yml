@@ -1,0 +1,23 @@
+language: java
+
+# Disable sudo
+# sudo: false
+
+# JDK versions
+jdk:
+  - oraclejdk8
+#  - oraclejdk9
+
+# Cache
+# before_cache:
+#    - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+#    - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+# cache:
+#  directories:
+#    - $HOME/.gradle/caches/
+#    - $HOME/.gradle/wrapper/
+#
+before_install:
+  - chmod +x gradlew
+  - export ANDROID_HOME=$HOME/Android/Sdk
+  - export PATH=$PATH:$ANDROID_HOME/tools
