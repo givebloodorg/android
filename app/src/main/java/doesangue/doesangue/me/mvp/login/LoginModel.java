@@ -3,6 +3,14 @@ package doesangue.doesangue.me.mvp.login;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -15,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import doesangue.doesangue.me.interfaces.LoginRequestListener;
+import doesangue.doesangue.me.server.MySingleton;
+import doesangue.doesangue.me.settings.SessionManager;
 
 /**
  * Created by JM on 05/10/2017.
@@ -32,11 +42,54 @@ public class LoginModel implements Contract.ModelImpl {
     @Override
     public void login(final String email, final String password, final LoginRequestListener loginRequestListener) {
 
+        Map<String, String> mParams = new HashMap<>();
+        mParams.put("email", email);
+        mParams.put("password", password);
+
+        String url = "https://doesangueapi.herokuapp.com/v1/auth/login";
+        JSONObject params = new JSONObject(mParams);
+
+        JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    Log.i(TAG, "TOKEN: " + response);
+
+                    // Retrieve the Token and Token type
+                    String token = response.getString("access_token");
+                    String tokenType = response.getString("token_type");
+
+                    // Save the Token and token type on session manager
+                    SessionManager sessionManager = new SessionManager(loginPresenter.getContext());
+                    sessionManager.setSessionToken(token);
+                    sessionManager.setTokenType(tokenType);
+
+                    // Notify the Presenter
+                    loginRequestListener.onLoginSuccess();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i(TAG, "VolleyError: " + error);
+                loginRequestListener.onLoginError(error.getMessage());
+            }
+        });
+
+        // Request login task
+        MySingleton.getInstance(loginPresenter.getContext()).addToRequestQueue(loginRequest);
+
+                /*
         new LoginTask(email, password, loginRequestListener)
-                .execute();
+                .execute();*/
     }
 }
 
+@Deprecated
 class LoginTask extends AsyncTask<String, Integer, String> {
 
     private WebComons wc = new WebComons();
@@ -70,12 +123,13 @@ class LoginTask extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s != null) {
+
             loginRequestListener.onLoginSuccess();
         }
     }
 }
 
-
+@Deprecated
 class WebComons {
 
 

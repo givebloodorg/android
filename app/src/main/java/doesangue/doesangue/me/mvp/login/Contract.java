@@ -9,7 +9,7 @@ import doesangue.doesangue.me.interfaces.LoginRequestListener;
  * Created by JM on 05/10/2017.
  */
 
-public class Contract {
+class Contract {
 
     // The conract for LoginModel
     interface ModelImpl {

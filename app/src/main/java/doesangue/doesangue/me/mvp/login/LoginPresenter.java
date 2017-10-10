@@ -95,6 +95,7 @@ public class LoginPresenter implements Contract.PresenterImpl, LoginRequestListe
         view.dismissLoginInProgressMessage();
 
         // Show the error
-        view.showLoginError(message);
+        //view.showLoginError(message);
+        view.showLoginError(getContext().getString(R.string.someting_was_wrong));
     }
 }

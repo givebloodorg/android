@@ -8,4 +8,5 @@
     <string name="type_password">Digite alguma senha</string>
     <string name="login_error_title">Falha!</string>
     <string name="please_wait">Por favor agurade...</string>
+    <string name="someting_was_wrong">Algo de errado aconteceu. Verifique seus dados e tente novamente!</string>
 </resources>
