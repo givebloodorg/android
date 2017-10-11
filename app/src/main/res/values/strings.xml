@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Doe Sangue</string>
+
     <string name="password">Senha</string>
     <string name="email">Email</string>
     <string name="login_text_button">Fazer login</string>
@@ -9,4 +10,5 @@
     <string name="login_error_title">Falha!</string>
     <string name="please_wait">Por favor agurade...</string>
     <string name="someting_was_wrong">Algo de errado aconteceu. Verifique seus dados e tente novamente!</string>
+
 </resources>
