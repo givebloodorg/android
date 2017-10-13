@@ -8,4 +8,6 @@
     <string name="type_password">Digite alguma senha</string>
     <string name="login_error_title">Falha!</string>
     <string name="please_wait">Por favor agurade...</string>
+    <string name="icon_user">Icon de utilizador</string>
+    <string name="full_name">Nome Completo</string>
 </resources>
