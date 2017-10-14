@@ -1,7 +1,12 @@
 package doesangue.doesangue.me.mvp.login;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -20,10 +25,12 @@ import doesangue.doesangue.me.interfaces.LoginRequestListener;
  * Created by JM on 05/10/2017.
  */
 
-public class LoginModel implements Contract.ModelImpl {
+public class LoginModel  implements Contract.ModelImpl {
 
     public static final String TAG = "output";
     private LoginPresenter loginPresenter;
+    public static String httpOutput;
+
 
     public LoginModel(LoginPresenter loginPresenter) {
         this.loginPresenter = loginPresenter;
@@ -35,9 +42,19 @@ public class LoginModel implements Contract.ModelImpl {
         new LoginTask(email, password, loginRequestListener)
                 .execute();
     }
+
+    public String getHttpOutput(){
+
+        return this.httpOutput;
+    }
+//
+//    public void setHttpOutput(String parameter){
+//
+//        this.httpOutput=parameter;
+//    }
 }
 
-class LoginTask extends AsyncTask<String, Integer, String> {
+class LoginTask extends AsyncTask<String, Integer, String>  {
 
     private WebComons wc = new WebComons();
     private Map<String, Object> params = new HashMap<>();
@@ -54,6 +71,8 @@ class LoginTask extends AsyncTask<String, Integer, String> {
         try {
             String loginUrl = "v1/auth/login";
             HttpURLConnection conn = wc.request("https://doesangueapi.herokuapp.com/", loginUrl, 1, params);
+
+
 
             return wc.resPonde(conn);
 
@@ -76,7 +95,7 @@ class LoginTask extends AsyncTask<String, Integer, String> {
 }
 
 
-class WebComons {
+class WebComons  {
 
 
     public static final String WS_HOST = "http://192.168.1.100/servidor_farras";
@@ -172,12 +191,14 @@ class WebComons {
             retorno = getStringInputStream(httpURLConnection.getInputStream());
             httpURLConnection.disconnect();
 
+            LoginModel.httpOutput=retorno;
+
             return retorno;
 
         } else {
 
             assert httpURLConnection != null;
-            throw new Exception("  comonicação http  WebComons erro na resposta :" + httpURLConnection.getResponseMessage());
+            throw new Exception("  comunicação http  WebComons erro na resposta :" + httpURLConnection.getResponseMessage());
         }
     }
 

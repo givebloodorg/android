@@ -83,6 +83,7 @@ public class LoginPresenter implements Contract.PresenterImpl, LoginRequestListe
 
         // Start the MainActivity
         Intent i = new Intent(getContext(), MainActivity.class);
+        i.putExtra("access_token", model.getHttpOutput());
         view.startMainActivity(i);
     }
 
