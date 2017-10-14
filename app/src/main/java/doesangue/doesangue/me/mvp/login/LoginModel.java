@@ -37,14 +37,15 @@ public class LoginModel  implements Contract.ModelImpl {
     }
 
     @Override
-    public void login(final String email, final String password, final LoginRequestListener loginRequestListener) {
-
-        new LoginTask(email, password, loginRequestListener)
-                .execute();
+    public void login(
+        final String email,
+        final String password,
+        final LoginRequestListener loginRequestListener
+    ) {
+        new LoginTask(email, password, loginRequestListener).execute();
     }
 
     public String getHttpOutput(){
-
         return this.httpOutput;
     }
 //
@@ -60,7 +61,11 @@ class LoginTask extends AsyncTask<String, Integer, String>  {
     private Map<String, Object> params = new HashMap<>();
     private LoginRequestListener loginRequestListener;
 
-    public LoginTask(String email, String password, LoginRequestListener loginRequestListener) {
+    public LoginTask(
+        String email,
+        String password,
+        LoginRequestListener loginRequestListener
+    ) {
         this.loginRequestListener = loginRequestListener;
         params.put("email", email);
         params.put("password", password);
@@ -72,16 +77,14 @@ class LoginTask extends AsyncTask<String, Integer, String>  {
             String loginUrl = "v1/auth/login";
             HttpURLConnection conn = wc.request("https://doesangueapi.herokuapp.com/", loginUrl, 1, params);
 
-
-
             return wc.resPonde(conn);
 
         } catch (Exception e) {
-
             e.printStackTrace();
 
             loginRequestListener.onLoginError(e.getMessage());
         }
+        
         return null;
     }
 
@@ -94,9 +97,7 @@ class LoginTask extends AsyncTask<String, Integer, String>  {
     }
 }
 
-
 class WebComons  {
-
 
     public static final String WS_HOST = "http://192.168.1.100/servidor_farras";
 
@@ -105,9 +106,13 @@ class WebComons  {
     // public static final int GET = 2;
 
 
-    public synchronized HttpURLConnection request(String host, String path, int metodo, Map<String, Object> params) throws Exception {
-
-
+    public synchronized HttpURLConnection request(
+        String host,
+        String path,
+        int metodo,
+        Map<String, Object> params
+    ) throws Exception {
+        
         HttpURLConnection connection;
         String urlString = host;
         urlString += path;
@@ -129,7 +134,9 @@ class WebComons  {
 
         if (params != null && params.size() > 0) {
             String urlParameters = criarParams(params);
+            
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+            
             wr.writeBytes(urlParameters);
             wr.flush();
             wr.close();
@@ -144,6 +151,7 @@ class WebComons  {
         StringBuilder paramsData = new StringBuilder();
 
         Log.d("text", "Parametros : " + paramsMap.toString());
+        
         for (Map.Entry<String, Object> param : paramsMap.entrySet()) {
             if (paramsData.length() != 0) paramsData.append('&');
 
@@ -152,6 +160,7 @@ class WebComons  {
             paramsData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
 
         }
+        
         return paramsData.toString();
     }
 
@@ -161,6 +170,7 @@ class WebComons  {
         StringBuilder sb = new StringBuilder();
 
         String line;
+        
         try {
 
             br = new BufferedReader(new InputStreamReader(is));
@@ -189,16 +199,15 @@ class WebComons  {
         String retorno;
         if (httpURLConnection != null && httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
             retorno = getStringInputStream(httpURLConnection.getInputStream());
+            
             httpURLConnection.disconnect();
 
             LoginModel.httpOutput=retorno;
 
             return retorno;
-
         } else {
-
             assert httpURLConnection != null;
-            throw new Exception("  comunicação http  WebComons erro na resposta :" + httpURLConnection.getResponseMessage());
+            throw new Exception("Comunicação http  WebComons erro na resposta :" + httpURLConnection.getResponseMessage());
         }
     }
 
