@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         txtMsg=(TextView)findViewById(R.id.txtMsg);
 
        // getJsonAuthenticatedUser();
-
     }
 
     @Override
@@ -66,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intentToProfile);
         }
 
-
         return super.onOptionsItemSelected(item);
     }
-
-
 }
