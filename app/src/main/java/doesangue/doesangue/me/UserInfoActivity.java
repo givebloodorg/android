@@ -23,8 +23,7 @@ import doesangue.doesangue.me.server.VolleySingleton;
 
 public class UserInfoActivity extends AppCompatActivity {
 
-    private static final String TAG = UserInfoActivity.class.toString() ;
-
+    private static final String TAG = UserInfoActivity.class.toString();
 
     TextView txtUsername, txtFirstName, txtSurname;
     
@@ -52,13 +51,13 @@ public class UserInfoActivity extends AppCompatActivity {
         try {
             
             jsonToken = new JSONObject(auth_token);
-            auth_token=jsonToken.getString("access_token");
+            auth_token = jsonToken.getString("access_token");
             
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        final String login_token=auth_token;
+        final String login_token = auth_token;
 
         Log.i(TAG, "value of the login token " + login_token);
 
@@ -103,8 +102,8 @@ public class UserInfoActivity extends AppCompatActivity {
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-
                 Map<String,String> headers = new HashMap<>();
+                
                 headers.put("Content-type", "application/json");
                 headers.put("Authorization", "Bearer " +l ogin_token);
 
