@@ -105,7 +105,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 Map<String,String> headers = new HashMap<>();
                 
                 headers.put("Content-type", "application/json");
-                headers.put("Authorization", "Bearer " +l ogin_token);
+                headers.put("Authorization", "Bearer " + login_token);
 
                 return headers;
             }
