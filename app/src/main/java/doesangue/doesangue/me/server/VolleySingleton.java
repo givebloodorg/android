@@ -17,15 +17,13 @@ public class VolleySingleton {
     private Context context;
 
     public VolleySingleton(Context context) {
-
         this.context = context;
+        
         requestQueue = getRequestQueue();
     }
 
     public static synchronized VolleySingleton getInstance(Context context) {
-
         if (mInstance == null) {
-
             mInstance = new VolleySingleton(context);
         }
 
@@ -33,20 +31,14 @@ public class VolleySingleton {
     }
 
     public RequestQueue getRequestQueue() {
-
-
         if (requestQueue == null) {
-
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
-
 
         return requestQueue;
     }
 
     public <T> void addRequest(Request<T> request) {
-
         requestQueue.add(request);
-
     }
 }
