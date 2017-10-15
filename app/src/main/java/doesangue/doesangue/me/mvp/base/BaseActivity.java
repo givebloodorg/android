@@ -52,9 +52,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         builder.setPositiveButton(R.string.ok, null);
 
         runOnUiThread(new Runnable() {
+            
             @Override
             public void run() {
-
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
@@ -68,11 +68,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             progressDialog.setCancelable(false);
         }
 
-
         runOnUiThread(new Runnable() {
+            
             @Override
             public void run() {
-
                 progressDialog.setMessage(getString(message));
                 progressDialog.show();
             }
@@ -81,7 +80,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public final void dismissProgress() {
-        if (progressDialog != null)
+        if (progressDialog != null) {
             progressDialog.dismiss();
+        }
     }
 }

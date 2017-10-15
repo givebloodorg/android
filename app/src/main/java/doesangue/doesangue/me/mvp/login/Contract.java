@@ -8,18 +8,20 @@ import doesangue.doesangue.me.interfaces.LoginRequestListener;
 /**
  * Created by JM on 05/10/2017.
  */
-
 public class Contract {
-
     // The conract for LoginModel
     interface ModelImpl {
 
-        void login(String email, String password, LoginRequestListener loginRequestListener);
+        void login(
+            String email,
+            String password,
+            LoginRequestListener loginRequestListener
+        );
     }
 
     // The conract for LoginActivity
     interface ViewImpl{
-
+        
         String getEmail();
         String getPassword();
 
@@ -37,7 +39,6 @@ public class Contract {
 
     // The conract for LoginPresenter
     interface PresenterImpl{
-
         Context getContext();
 
         void onLoginButtonClicked();
